@@ -1,0 +1,26 @@
+{
+  "name": "doubao-science-30s-remotion-prototype",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio src/index.tsx --host 0.0.0.0",
+    "typecheck": "tsc --noEmit",
+    "render": "remotion render src/index.tsx DoubaoScience30 out/2026-06-03_10-20_豆包科普视频_0_30s_remotion工程样片.mp4 --codec h264 --overwrite",
+    "render:debug": "remotion render src/index.tsx DoubaoScience30-Debug out/2026-06-03_10-20_豆包科普视频_0_30s_remotion工程样片_debug.mp4 --codec h264 --overwrite",
+    "still:09": "remotion still src/index.tsx DoubaoScience30 out/frame_09s.png --frame=216 --overwrite",
+    "still:22": "remotion still src/index.tsx DoubaoScience30 out/frame_22s.png --frame=528 --overwrite",
+    "still:22:debug": "remotion still src/index.tsx DoubaoScience30-Debug out/frame_22s_debug.png --frame=528 --overwrite",
+    "check-assets": "node scripts/check-assets.mjs",
+    "check-assets:strict": "node scripts/check-assets.mjs --strict"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.471",
+    "@types/react": "^19.2.16",
+    "@types/react-dom": "^19.2.3",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "remotion": "^4.0.471",
+    "typescript": "^6.0.3"
+  }
+}

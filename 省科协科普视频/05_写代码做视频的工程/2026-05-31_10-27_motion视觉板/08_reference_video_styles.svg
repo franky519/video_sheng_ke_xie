@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#f5f6fa"/>
+  <text x="48" y="58" fill="#14171f" font-size="30" font-family="Arial, sans-serif" font-weight="700">参考视频风格拆解：差评君 vs 冲浪普拉斯</text>
+  <text x="48" y="92" fill="#5b6472" font-size="17" font-family="Arial, sans-serif">只学习画面方法，不搬原片素材</text>
+
+  <rect x="62" y="132" width="396" height="316" rx="18" fill="#ffffff" stroke="#d8dee9"/>
+  <text x="92" y="174" fill="#111827" font-size="24" font-family="Arial, sans-serif" font-weight="800">差评君</text>
+  <rect x="94" y="210" width="132" height="80" rx="10" fill="#e8f3ff" stroke="#6aaee8"/>
+  <text x="120" y="255" fill="#1f2937" font-size="17" font-family="Arial, sans-serif">新闻网页</text>
+  <rect x="250" y="210" width="132" height="80" rx="10" fill="#eef5ee" stroke="#8ccf8a"/>
+  <text x="280" y="255" fill="#1f2937" font-size="17" font-family="Arial, sans-serif">Logo 阵列</text>
+  <rect x="94" y="318" width="132" height="80" rx="10" fill="#101827" stroke="#7dd3fc"/>
+  <text x="118" y="362" fill="#e0f2fe" font-size="17" font-family="Arial, sans-serif">3D/B-roll</text>
+  <rect x="250" y="318" width="132" height="80" rx="10" fill="#f7f7f7" stroke="#9ca3af"/>
+  <text x="280" y="362" fill="#1f2937" font-size="17" font-family="Arial, sans-serif">结构图</text>
+
+  <rect x="502" y="132" width="396" height="316" rx="18" fill="#111111"/>
+  <text x="532" y="174" fill="#ffffff" font-size="24" font-family="Arial, sans-serif" font-weight="800">冲浪普拉斯</text>
+  <path d="M532 200 H868 M532 230 H868 M532 260 H868 M532 290 H868 M532 320 H868 M532 350 H868 M532 380 H868" stroke="#303030"/>
+  <path d="M560 198 V402 M620 198 V402 M680 198 V402 M740 198 V402 M800 198 V402 M860 198 V402" stroke="#303030"/>
+  <rect x="562" y="218" width="268" height="86" rx="8" fill="#ffffff"/>
+  <text x="588" y="254" fill="#111827" font-size="17" font-family="Arial, sans-serif">资料卡片 + 红色重点框</text>
+  <rect x="588" y="268" width="180" height="10" fill="#ff4d5a" opacity="0.8"/>
+  <rect x="594" y="330" width="238" height="52" rx="6" fill="#ffffff"/>
+  <text x="616" y="362" fill="#111827" font-size="16" font-family="Arial, sans-serif">堆叠截图 / 表格 / 架构图</text>
+</svg>
