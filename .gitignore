@@ -1,2 +1,16 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+
+# Temp / build
+temp_frames/
+*.tmp
+
 # Local API keys and private runtime config
 省科协科普视频/Gemini本地私密配置.env
