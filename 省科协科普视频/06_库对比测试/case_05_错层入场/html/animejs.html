@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: rgb(30,32,35); overflow: hidden; }
+  .canvas {
+    width: 1280px; height: 720px; position: relative; margin: 0 auto;
+    background: rgb(30,32,35);
+  }
+  .side-panel {
+    position: absolute; right: 100px; top: 50%;
+    transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .risk-card {
+    width: 680px; height: 64px;
+    background: rgb(60,65,70); border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    display: flex; align-items: center; padding: 0 24px;
+    font-family: system-ui, sans-serif;
+    font-size: 18px; color: rgba(255,255,255,0.85);
+  }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%; margin-right: 16px;
+    flex-shrink: 0;
+  }
+  .risk-card:nth-child(1) .dot { background: rgb(255,100,80); }
+  .risk-card:nth-child(2) .dot { background: rgb(255,160,20); }
+  .risk-card:nth-child(3) .dot { background: rgb(80,200,255); }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="side-panel">
+    <div class="risk-card" id="rc1"><span class="dot"></span>免责条款容易漏看</div>
+    <div class="risk-card" id="rc2"><span class="dot"></span>赔付条件差异大</div>
+    <div class="risk-card" id="rc3"><span class="dot"></span>附录小字需注意</div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+<script>
+  anime.set("#rc1,#rc2,#rc3", { translateX: "120%", rotate: "8deg", opacity: 0 });
+  anime({
+    targets: "#rc1,#rc2,#rc3",
+    translateX: "0%", rotate: "0deg", opacity: 1,
+    easing: "easeOutQuad", duration: 600,
+    delay: anime.stagger(800, { start: 200 }),
+  });
+</script>
+</body>
+</html>

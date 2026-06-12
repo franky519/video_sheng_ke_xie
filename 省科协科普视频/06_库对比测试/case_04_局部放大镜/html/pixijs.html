@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: rgb(30,32,35); overflow: hidden; margin: 0; }
+</style>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.3.3/pixi.min.js"></script>
+<script>
+(async () => {
+  const app = new PIXI.Application({
+    width: 1280, height: 720,
+    backgroundColor: 0x1E2023,
+    antialias: true,
+  });
+  document.body.appendChild(app.view);
+
+  const card = new PIXI.Graphics();
+  card.beginFill(0x32353A);
+  card.drawRoundedRect(0, 0, 800, 400, 12);
+  card.endFill();
+  card.x = 240; card.y = 160;
+  app.stage.addChild(card);
+
+  const style = new PIXI.TextStyle({
+    fontFamily: 'system-ui, sans-serif',
+    fontSize: 28, fontWeight: '600',
+    fill: 'rgba(255,255,255,0.9)',
+  });
+  const title = new PIXI.Text('保险条款关键差异分析', style);
+  title.x = 50; title.y = 40;
+  card.addChild(title);
+
+  for (let i = 0; i < 3; i++) {
+    const line = new PIXI.Graphics();
+    line.beginFill(0xFFFFFF, 0.07);
+    line.drawRoundedRect(0, 0, [704, 736, 600][i], 16, 3);
+    line.endFill();
+    line.x = 50; line.y = 90 + i * 32;
+    card.addChild(line);
+  }
+
+  const fine = new PIXI.Text(
+    '* 附录第3.2条 等待期免责 / * 附录第5.7条 重疾定义差异 / * 免责声明 仅供参考',
+    { fontFamily: 'system-ui, sans-serif', fontSize: 11, fill: 'rgba(255,255,255,0.25)' }
+  );
+  fine.x = 50; fine.y = 350;
+  card.addChild(fine);
+
+  const magnifier = new PIXI.Container();
+  magnifier.x = 800; magnifier.y = 320;
+
+  const mask = new PIXI.Graphics();
+  mask.beginFill(0xFFFFFF);
+  mask.drawCircle(120, 120, 120);
+  mask.endFill();
+  magnifier.addChild(mask);
+  magnifier.mask = mask;
+
+  const innerCard = new PIXI.Graphics();
+  innerCard.beginFill(0x32353A);
+  innerCard.drawRoundedRect(0, 0, 800, 400, 12);
+  innerCard.endFill();
+  innerCard.scale.set(2.5);
+  innerCard.x = -1350; innerCard.y = -700;
+  magnifier.addChild(innerCard);
+
+  const innerTitle = new PIXI.Text('保险条款关键差异分析', style);
+  innerTitle.x = 50; innerTitle.y = 40;
+  innerCard.addChild(innerTitle);
+
+  for (let i = 0; i < 3; i++) {
+    const line = new PIXI.Graphics();
+    line.beginFill(0xFFFFFF, 0.07);
+    line.drawRoundedRect(0, 0, [704, 736, 600][i], 16, 3);
+    line.endFill();
+    line.x = 50; line.y = 90 + i * 32;
+    innerCard.addChild(line);
+  }
+
+  const ring = new PIXI.Graphics();
+  ring.lineStyle(2, 0xFFFFFF, 0.5);
+  ring.drawCircle(120, 120, 120);
+  magnifier.addChild(ring);
+
+  magnifier.alpha = 0;
+  magnifier.scale.set(0);
+  app.stage.addChild(magnifier);
+
+  const startTime = performance.now();
+  app.ticker.add(() => {
+    const elapsed = (performance.now() - startTime) / 1000;
+    const magP = Math.min(1, Math.max(0, elapsed / 0.8));
+    if (magP < 1) {
+      magnifier.alpha = magP;
+      magnifier.scale.set(magP);
+    } else {
+      magnifier.x = 800 + Math.sin(elapsed * 18) * 2;
+      magnifier.y = 320 + Math.cos(elapsed * 20) * 2;
+    }
+    if (elapsed > 3.5) app.ticker.stop();
+  });
+})();
+</script>
+</body>
+</html>

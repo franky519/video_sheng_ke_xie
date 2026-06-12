@@ -15,7 +15,9 @@ import json
 import time
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
-from urllib import request, error
+import requests
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_DIR = SCRIPT_DIR.parent          # 06_库对比测试/
@@ -86,49 +88,72 @@ def build_judge_prompt(source_text: str, lib_video_map: list[dict]) -> str:
 """
 
 
+def get_proxies() -> dict:
+    proxies = {}
+    for key in ("HTTPS_PROXY", "HTTP_PROXY", "https_proxy", "http_proxy", "all_proxy", "ALL_PROXY"):
+        val = os.environ.get(key, "")
+        if val:
+            if val.startswith("http://") or val.startswith("socks5://"):
+                proxies["https"] = val
+                proxies["http"] = val
+                break
+    return proxies
+
+
 def upload_video(api_key: str, video_path: Path) -> dict:
     file_size = video_path.stat().st_size
     display_name = video_path.name
+    proxies = get_proxies()
 
-    init_body = json.dumps({"file": {"display_name": display_name}})
-    req = request.Request(
+    resp = requests.post(
         UPLOAD_URL,
-        data=init_body.encode(),
+        json={"file": {"display_name": display_name}},
         headers={
             "x-goog-api-key": api_key,
             "X-Goog-Upload-Protocol": "resumable",
             "X-Goog-Upload-Command": "start",
             "X-Goog-Upload-Header-Content-Length": str(file_size),
             "X-Goog-Upload-Header-Content-Type": "video/webm",
-            "Content-Type": "application/json; charset=utf-8",
         },
-        method="POST",
+        proxies=proxies,
+        timeout=30,
+        verify=False,
     )
-    resp = request.urlopen(req, timeout=30)
+    resp.raise_for_status()
     upload_url = resp.headers.get("X-Goog-Upload-URL")
     if not upload_url:
-        raise RuntimeError("未获取到上传 URL")
+        raise RuntimeError(f"未获取到上传 URL, response: {resp.headers}")
 
     with open(video_path, "rb") as f:
         data = f.read()
-    req2 = request.Request(upload_url, data=data,
+    resp2 = requests.post(
+        upload_url,
+        data=data,
         headers={
             "Content-Type": "video/webm",
-            "Content-Length": str(len(data)),
             "X-Goog-Upload-Offset": "0",
             "X-Goog-Upload-Command": "upload, finalize",
-        }, method="POST")
-    resp2 = request.urlopen(req2, timeout=300)
-    return json.loads(resp2.read().decode())
+        },
+        proxies=proxies,
+        timeout=300,
+        verify=False,
+    )
+    resp2.raise_for_status()
+    return resp2.json()
 
 
 def wait_for_active(api_key: str, file_name: str, max_retries: int = 20) -> dict:
+    proxies = get_proxies()
     for i in range(max_retries):
-        req = request.Request(
-            f"{BASE_URL}/{file_name}", method="GET",
-            headers={"x-goog-api-key": api_key})
-        resp = request.urlopen(req, timeout=10)
-        info = json.loads(resp.read().decode())
+        resp = requests.get(
+            f"{BASE_URL}/{file_name}",
+            headers={"x-goog-api-key": api_key},
+            proxies=proxies,
+            timeout=10,
+            verify=False,
+        )
+        resp.raise_for_status()
+        info = resp.json()
         state = info.get("state", "UNKNOWN")
         print(f"  状态({i+1}): {state}")
         if state == "ACTIVE":
@@ -218,33 +243,30 @@ def main():
     print(f"发送评判请求到 {model}...")
     print(f"Files: {[u['file_name'] for u in uploaded]}")
     print(f"URIs: {[u['uri'][:60]+'...' for u in uploaded]}")
+    print(f"Payload size: {len(json.dumps(payload))} bytes")
 
-    req_body = json.dumps(payload).encode()
-    print(f"Payload size: {len(req_body)} bytes")
-
-    req = request.Request(url, data=req_body,
-        headers={"x-goog-api-key": api_key, "Content-Type": "application/json"}, method="POST")
-
-    try:
-        import time as _time
-        for g_attempt in range(5):
-            try:
-                resp = request.urlopen(req, timeout=120)
-                break
-            except Exception as e:
-                err_str = str(e)
-                if ("503" in err_str or "UNAVAILABLE" in err_str or "429" in err_str) and g_attempt < 4:
-                    wait_s = (g_attempt + 1) * 10
-                    print(f"  Gemini 繁忙，{wait_s}秒后重试 ({g_attempt+1}/5)...")
-                    _time.sleep(wait_s)
-                else:
-                    raise
-        result = json.loads(resp.read().decode())
-    except Exception as e:
-        print(f"Error: {e}")
-        if hasattr(e, 'read'):
-            print(f"Response body: {e.read().decode()[:500]}")
-        raise
+    proxies = get_proxies()
+    for g_attempt in range(5):
+        try:
+            resp = requests.post(
+                url,
+                json=payload,
+                headers={"x-goog-api-key": api_key},
+                proxies=proxies,
+                timeout=120,
+                verify=False,
+            )
+            resp.raise_for_status()
+            break
+        except Exception as e:
+            err_code = getattr(getattr(e, 'response', None), 'status_code', None)
+            if err_code in (503, 429) and g_attempt < 4:
+                wait_s = (g_attempt + 1) * 10
+                print(f"  Gemini 繁忙，{wait_s}秒后重试 ({g_attempt+1}/5)...")
+                time.sleep(wait_s)
+            else:
+                raise
+    result = resp.json()
 
     candidates = result.get("candidates", [])
     if not candidates:

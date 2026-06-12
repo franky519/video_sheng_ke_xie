@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: rgb(30,32,35); overflow: hidden; margin: 0; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="cvs"></canvas>
+<script>
+const cvs = document.getElementById("cvs");
+const ctx = cvs.getContext("2d");
+cvs.width = 1280;
+cvs.height = 720;
+
+const startTime = performance.now();
+
+function roundRect(x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.arcTo(x + w, y, x + w, y + r, r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
+  ctx.lineTo(x + r, y + h);
+  ctx.arcTo(x, y + h, x, y + h - r, r);
+  ctx.lineTo(x, y + r);
+  ctx.arcTo(x, y, x + r, y, r);
+  ctx.closePath();
+}
+
+function drawCard(cx, cy, cw, ch) {
+  ctx.fillStyle = "rgb(50,53,58)";
+  roundRect(cx, cy, cw, ch, 12);
+  ctx.fill();
+
+  ctx.fillStyle = "rgba(255,255,255,0.9)";
+  ctx.font = "600 28px system-ui, sans-serif";
+  ctx.fillText("保险条款关键差异分析", cx + 50, cy + 68);
+
+  ctx.fillStyle = "rgba(255,255,255,0.07)";
+  const lines = [0.88, 0.92, 0.75];
+  lines.forEach((w, i) => {
+    ctx.fillRect(cx + 50, cy + 90 + i * 32, cw * w - 100, 16);
+  });
+
+  ctx.fillStyle = "rgba(255,255,255,0.25)";
+  ctx.font = "11px system-ui, sans-serif";
+  ctx.fillText("* 附录第3.2条 等待期免责 / * 附录第5.7条 重疾定义差异 / * 免责声明 仅供参考", cx + 50, cy + ch - 40);
+}
+
+function draw(t) {
+  const elapsed = (t - startTime) / 1000;
+
+  ctx.fillStyle = "rgb(30,32,35)";
+  ctx.fillRect(0, 0, 1280, 720);
+
+  const cx = 240, cy = 160, cw = 800, ch = 400;
+  drawCard(cx, cy, cw, ch);
+
+  const magP = Math.min(1, Math.max(0, elapsed / 0.8));
+  if (magP > 0) {
+    const jitterX = Math.sin(elapsed * 18) * 2;
+    const jitterY = Math.cos(elapsed * 20) * 2;
+    const mgx = cx + cw - 240 + jitterX;
+    const mgy = cy + ch - 240 + jitterY;
+    const magR = 120;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(mgx + magR, mgy + magR, magR, 0, Math.PI * 2);
+    ctx.clip();
+
+    ctx.save();
+    ctx.translate(mgx - 680, mgy - 300);
+    ctx.scale(2.5, 2.5);
+    drawCard(cx, cy, cw, ch);
+    ctx.restore();
+
+    ctx.strokeStyle = "rgba(255,255,255,0.5)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(mgx + magR, mgy + magR, magR, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  if (elapsed < 3.5) requestAnimationFrame(draw);
+}
+
+requestAnimationFrame(draw);
+</script>
+</body>
+</html>

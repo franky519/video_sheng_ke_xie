@@ -9,8 +9,8 @@
  */
 
 import { chromium } from 'playwright';
-import { resolve, basename } from 'path';
-import { mkdirSync, existsSync, renameSync, readdirSync } from 'fs';
+import { resolve, basename, join } from 'path';
+import { mkdirSync, existsSync, renameSync, readdirSync, statSync } from 'fs';
 
 const htmlPath = resolve(process.argv[2]);
 const outputDir = resolve(process.argv[3]);
@@ -44,9 +44,11 @@ await page.waitForTimeout(duration + 1000);
 await context.close();
 await browser.close();
 
-// Playwright 默认用随机名，重命名为库名
-const files = readdirSync(outputDir);
-const videoFile = files.find(f => f.endsWith('.webm'));
+// Playwright 默认用随机名，按修改时间取最新的，重命名为库名
+const files = readdirSync(outputDir)
+  .filter(f => f.endsWith('.webm') && !f.startsWith(libName))
+  .sort((a, b) => statSync(join(outputDir, b)).mtimeMs - statSync(join(outputDir, a)).mtimeMs);
+const videoFile = files[0];
 if (videoFile) {
   renameSync(`${outputDir}/${videoFile}`, `${outputDir}/${libName}.webm`);
   console.log(`完成: ${outputDir}/${libName}.webm`);
