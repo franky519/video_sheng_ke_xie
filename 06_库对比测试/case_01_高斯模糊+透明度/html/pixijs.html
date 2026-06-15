@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: rgb(30,32,35); overflow: hidden; display: flex; justify-content: center; }
+</style>
+</head>
+<body>
+<script src="https://pixijs.download/v8.6.6/pixi.min.js"></script>
+<script>
+  (async () => {
+    const app = new PIXI.Application();
+    await app.init({
+      width: 1280, height: 720,
+      background: 0x1e2023,
+      antialias: true,
+      resolution: window.devicePixelRatio || 1,
+      autoDensity: true,
+    });
+    document.body.appendChild(app.canvas);
+
+    // card container
+    const card = new PIXI.Container();
+
+    // card background
+    const bg = new PIXI.Graphics();
+    bg.roundRect(-400, -150, 800, 300, 12);
+    bg.fill({ color: 0x32353a });
+    // shadow via blur filter on a separate object
+    const shadow = new PIXI.Graphics();
+    shadow.roundRect(-400, -146, 800, 300, 12);
+    shadow.fill({ color: 0x000000 });
+    shadow.alpha = 0.3;
+    const shadowBlur = new PIXI.BlurFilter(12);
+    shadow.filters = [shadowBlur];
+    shadow.y = 4;
+    card.addChild(shadow);
+    card.addChild(bg);
+
+    // text lines
+    const lines = [
+      { w: 0.80 * 800 - 80, y: -150 + 50 },
+      { w: 0.95 * 800 - 80, y: -150 + 106 },
+      { w: 0.72 * 800 - 80, y: -150 + 162 },
+      { w: 0.88 * 800 - 80, y: -150 + 218 },
+    ];
+
+    for (const l of lines) {
+      const line = new PIXI.Graphics();
+      line.roundRect(-400 + 40, l.y, l.w, 18, 4);
+      line.fill({ color: 0xffffff, alpha: 0.06 });
+      card.addChild(line);
+    }
+
+    card.x = 640;
+    card.y = 360;
+    app.stage.addChild(card);
+
+    // hint
+    const hint = new PIXI.Container();
+    const hintBg = new PIXI.Graphics();
+    hintBg.roundRect(0, 0, 240, 120, 8);
+    hintBg.fill({ color: 0x283c32 });
+    hintBg.stroke({ color: 0x00c850, alpha: 0.3, width: 1 });
+    hint.addChild(hintBg);
+    const hintText = new PIXI.Text({ text: "专家窗口 →", style: { fill: 0x00c850, alpha: 0.5, fontSize: 16, fontFamily: "system-ui" } });
+    hintText.anchor.set(0.5);
+    hintText.x = 120;
+    hintText.y = 60;
+    hint.addChild(hintText);
+    hint.x = 1280 - 320;
+    hint.y = 80;
+    app.stage.addChild(hint);
+
+    // blur filter
+    const blurFilter = new PIXI.BlurFilter();
+    blurFilter.quality = 4;
+    card.filters = [blurFilter];
+
+    // animate
+    const DURATION = 1500;
+    const start = performance.now();
+
+    app.ticker.add(() => {
+      const elapsed = performance.now() - start;
+      const t = Math.min(elapsed / DURATION, 1);
+
+      card.alpha = 1 - t * 0.7;
+      blurFilter.blur = 18 * t;
+    });
+  })();
+</script>
+</body>
+</html>

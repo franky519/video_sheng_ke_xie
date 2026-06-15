@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Node
+node_modules/
+.pnpm-store/
+
+# 私密配置
+Gemini本地私密配置.env
+
+# 临时文件
+temp_test_*.mp4
+*.tmp
+temp_frames/
+
+# IDE
+.vscode/
+.venv/
+
+# OS
+.DS_Store
+:Zone.Identifier

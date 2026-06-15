@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#111318"/>
+  <text x="48" y="58" fill="#f6f7fb" font-size="30" font-family="Arial, sans-serif" font-weight="700">Remotion / HTML UI：双聊天窗口 + 时间线动画</text>
+  <text x="48" y="92" fill="#aeb4c2" font-size="17" font-family="Arial, sans-serif">适合做：标题、字幕、聊天界面、按钮高亮、镜头推拉、关键词变色</text>
+
+  <rect x="66" y="126" width="360" height="300" rx="22" fill="#f5f6fa"/>
+  <rect x="88" y="150" width="316" height="38" rx="19" fill="#e4e7ef"/>
+  <circle cx="112" cy="169" r="10" fill="#ff5a5f"/>
+  <text x="142" y="175" fill="#222" font-size="18" font-family="Arial, sans-serif" font-weight="700">我的豆包：快速</text>
+  <rect x="102" y="220" width="242" height="54" rx="16" fill="#fff"/>
+  <text x="122" y="243" fill="#333" font-size="15" font-family="Arial, sans-serif">帮我看看这份保险条款</text>
+  <text x="122" y="263" fill="#333" font-size="15" font-family="Arial, sans-serif">有哪些坑？</text>
+  <rect x="132" y="292" width="238" height="76" rx="16" fill="#f0f1f4"/>
+  <text x="152" y="320" fill="#666" font-size="14" font-family="Arial, sans-serif">本产品保障 120 种疾病...</text>
+  <text x="152" y="342" fill="#666" font-size="14" font-family="Arial, sans-serif">等待期为 180 天...</text>
+
+  <rect x="534" y="126" width="360" height="300" rx="22" fill="#f5f6fa"/>
+  <rect x="556" y="150" width="316" height="38" rx="19" fill="#ffe9e9"/>
+  <circle cx="580" cy="169" r="10" fill="#ff334e"/>
+  <text x="610" y="175" fill="#222" font-size="18" font-family="Arial, sans-serif" font-weight="700">他的豆包：专家</text>
+  <rect x="570" y="220" width="242" height="54" rx="16" fill="#fff"/>
+  <text x="590" y="243" fill="#333" font-size="15" font-family="Arial, sans-serif">同一个问题</text>
+  <text x="590" y="263" fill="#333" font-size="15" font-family="Arial, sans-serif">同一份条款</text>
+  <rect x="600" y="292" width="238" height="92" rx="16" fill="#fff4d6"/>
+  <text x="620" y="318" fill="#2c2c2c" font-size="14" font-family="Arial, sans-serif">1. 等待期免责</text>
+  <text x="620" y="342" fill="#2c2c2c" font-size="14" font-family="Arial, sans-serif">2. 轻症降级赔付</text>
+  <text x="620" y="366" fill="#2c2c2c" font-size="14" font-family="Arial, sans-serif">3. 触发条件差异</text>
+
+  <path d="M440 276 C470 276 490 276 520 276" stroke="#ff334e" stroke-width="5" fill="none" marker-end="url(#arrow)"/>
+  <text x="443" y="252" fill="#ffccd3" font-size="16" font-family="Arial, sans-serif">镜头推向右侧</text>
+
+  <rect x="110" y="462" width="740" height="10" rx="5" fill="#2b2f3b"/>
+  <circle cx="220" cy="467" r="14" fill="#4cc9f0"/>
+  <circle cx="420" cy="467" r="14" fill="#ff334e"/>
+  <circle cx="620" cy="467" r="14" fill="#ffd166"/>
+  <text x="176" y="504" fill="#aeb4c2" font-size="15" font-family="Arial, sans-serif">Frame 0</text>
+  <text x="376" y="504" fill="#aeb4c2" font-size="15" font-family="Arial, sans-serif">Frame 90</text>
+  <text x="570" y="504" fill="#aeb4c2" font-size="15" font-family="Arial, sans-serif">Frame 180</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#ff334e"/>
+    </marker>
+  </defs>
+</svg>
