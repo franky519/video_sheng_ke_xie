@@ -1,49 +1,70 @@
 export const FPS = 24;
 export const WIDTH = 1280;
 export const HEIGHT = 720;
-export const DURATION_IN_FRAMES = FPS * 30;
+export const DURATION_IN_FRAMES = FPS * 36; // 36 秒视频
 
 export const secondsToFrames = (seconds: number) => Math.round(seconds * FPS);
 
 export const ranges = {
   intro: {
     start: secondsToFrames(0),
-    end: secondsToFrames(5),
+    end: secondsToFrames(2),
   },
   plainAnswer: {
-    start: secondsToFrames(5),
-    end: secondsToFrames(15),
+    start: secondsToFrames(2),
+    end: secondsToFrames(12),
   },
   expertAnswer: {
-    start: secondsToFrames(15),
-    end: secondsToFrames(25),
+    start: secondsToFrames(12),
+    end: secondsToFrames(22),
   },
   promptQuestion: {
-    start: secondsToFrames(25),
-    end: secondsToFrames(30),
+    start: secondsToFrames(22),
+    end: secondsToFrames(36),
   },
 } as const;
 
 export const subtitles = [
   {
     start: 0,
-    end: 5,
-    text: '同样问豆包，为什么他的答案像专家，你的答案像复制粘贴？',
+    end: 2,
+    text: '你有没有经历过这种诡异的事——',
   },
   {
-    start: 5,
-    end: 15,
-    text: '比如你们同时问：“帮我看看这份保险条款有哪些坑。”你的豆包说，本产品保障多少种重大疾病，等待期多少天，赔付比例是多少。听完像没听。',
+    start: 2,
+    end: 7,
+    text: '同样是把一份厚厚的重疾险条款拍照发给豆包，问它“这保险有没有坑”。',
   },
   {
-    start: 15,
-    end: 25,
-    text: '但你朋友的豆包会直接告诉你，哪条免责条款容易漏看，哪个赔付条件看着差不多其实完全不同，甚至能提醒你去看附录里的那几行小字。',
+    start: 7,
+    end: 12,
+    text: '你的豆包回了一堆“本产品保障多少种疾病、等待期多少天”的背书废话，听完跟没听一样。',
   },
   {
-    start: 25,
-    end: 30,
-    text: '这时候很多人第一反应是：是不是我不会提问？是不是他的提示词写得更好？',
+    start: 12,
+    end: 17,
+    text: '但你朋友的豆包，却能逐条列出三个隐藏极深的免责陷阱，',
+  },
+  {
+    start: 17,
+    end: 22,
+    text: '甚至连附录小字里的除外条款都给你标注得一清二楚。',
+  },
+  {
+    start: 22,
+    end: 26,
+    text: '这时候你肯定会去搜“豆包提问技巧”、“怎么写好提示词”，觉得是自己的问法有问题。',
+  },
+  {
+    start: 26,
+    end: 32,
+    text: '提问方式确实有影响，但它的上限是焊死的。把同一道分析题交给初中生和博士，题目写得再清晰，初中生也答不出博士的水平。',
+  },
+  {
+    start: 32,
+    end: 36,
+    text: '模型的能力上限摆在那，再好的提问技巧也突破不了。',
   },
 ] as const;
+
 

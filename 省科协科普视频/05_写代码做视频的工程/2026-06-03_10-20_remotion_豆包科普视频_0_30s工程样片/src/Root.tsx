@@ -7,7 +7,7 @@ export const Root = () => {
       <Composition
         id="DoubaoScience30"
         component={DoubaoScience30}
-        durationInFrames={720}
+        durationInFrames={864}
         fps={24}
         width={1280}
         height={720}
@@ -16,7 +16,7 @@ export const Root = () => {
       <Composition
         id="DoubaoScience30-Debug"
         component={DoubaoScience30}
-        durationInFrames={720}
+        durationInFrames={864}
         fps={24}
         width={1280}
         height={720}
