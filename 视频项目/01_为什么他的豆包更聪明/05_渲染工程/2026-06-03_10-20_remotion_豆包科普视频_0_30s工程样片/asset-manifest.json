@@ -1,0 +1,92 @@
+[
+  {
+    "id": "ASSET_01_01",
+    "description": "扁平化 iPhone 手机边框外壳（透明通道）",
+    "assetClass": "STOCK_LIBRARY",
+    "actionClass": "公共素材下载或使用 SVG/CSS 框代替",
+    "status": "TODO: STOCK",
+    "path": "public/assets/ASSET_01_01.png",
+    "prototypeFallback": "CSS_PHONE_FRAME"
+  },
+  {
+    "id": "ASSET_01_02",
+    "description": "豆包聊天窗口截图（普通长文本长句无排版）",
+    "assetClass": "HUMAN_CAPTURE",
+    "actionClass": "人工在豆包 App 截取平庸回复",
+    "status": "TODO: HUMAN",
+    "path": "public/assets/ASSET_01_02.png",
+    "prototypeFallback": "CSS_CHAT_PLAIN"
+  },
+  {
+    "id": "ASSET_01_03",
+    "description": "豆包聊天窗口截图（精细排版、高亮对比框）",
+    "assetClass": "HUMAN_CAPTURE",
+    "actionClass": "人工在豆包 App 截取高质量回复",
+    "status": "TODO: HUMAN",
+    "path": "public/assets/ASSET_01_03.png",
+    "prototypeFallback": "CSS_CHAT_EXPERT"
+  },
+  {
+    "id": "ASSET_02_01",
+    "description": "用户输入提问浮动卡片（包含提问文字）",
+    "assetClass": "GENERATE_BY_CODE",
+    "actionClass": "纯 CSS 渲染",
+    "status": "AUTO",
+    "path": null,
+    "prototypeFallback": "CSS_QUESTION_CARD"
+  },
+  {
+    "id": "ASSET_02_02",
+    "description": "平庸回答卡片（包含平庸保险介绍）",
+    "assetClass": "GENERATE_BY_CODE",
+    "actionClass": "纯 CSS 渲染",
+    "status": "AUTO",
+    "path": null,
+    "prototypeFallback": "CSS_PLAIN_ANSWER"
+  },
+  {
+    "id": "ASSET_03_01",
+    "description": "高质量三段式保险坑卡片（带绿/橙高亮底色）",
+    "assetClass": "GENERATE_BY_CODE",
+    "actionClass": "纯 CSS 渲染",
+    "status": "AUTO",
+    "path": null,
+    "prototypeFallback": "CSS_EXPERT_CARD"
+  },
+  {
+    "id": "ASSET_03_02",
+    "description": "附录小字区域局部无损放大镜容器",
+    "assetClass": "GENERATE_BY_CODE",
+    "actionClass": "同源 DOM 局部放大",
+    "status": "AUTO",
+    "path": null,
+    "prototypeFallback": "CSS_MAGNIFIER"
+  },
+  {
+    "id": "ASSET_04_01",
+    "description": "提示词卡片 A（提问指南文本）",
+    "assetClass": "GENERATE_BY_CODE",
+    "actionClass": "纯 CSS 渲染",
+    "status": "AUTO",
+    "path": null,
+    "prototypeFallback": "CSS_PROMPT_CARD_A"
+  },
+  {
+    "id": "ASSET_04_02",
+    "description": "提示词卡片 B（超级 Prompt 模板文本）",
+    "assetClass": "GENERATE_BY_CODE",
+    "actionClass": "纯 CSS 渲染",
+    "status": "AUTO",
+    "path": null,
+    "prototypeFallback": "CSS_PROMPT_CARD_B"
+  },
+  {
+    "id": "ASSET_04_03",
+    "description": "3D 红色发光立体问号图标（透明通道）",
+    "assetClass": "STOCK_LIBRARY",
+    "actionClass": "素材库下载 PNG 资产",
+    "status": "TODO: STOCK",
+    "path": "public/assets/ASSET_04_03.png",
+    "prototypeFallback": "CSS_QUESTION_MARK"
+  }
+]

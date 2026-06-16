@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: rgb(30,32,35); overflow: hidden; }
+  .canvas {
+    width: 1280px; height: 720px; position: relative; margin: 0 auto;
+    background: rgb(30,32,35); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 40px;
+  }
+  @property --num {
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 0;
+  }
+  .number {
+    font-family: monospace; font-size: 72px; color: white; font-weight: 700;
+    animation: countUp 0.5s ease-out 0.3s forwards;
+    counter-reset: display calc(var(--num) * 10000);
+  }
+  @keyframes countUp {
+    from { --num: 0; }
+    to { --num: 35; }
+  }
+  .bar-wrap { width: 80px; height: 200px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; }
+  .bar { width: 100%; background: rgb(0,200,80); border-radius: 4px; height: 0; transition: height 0.8s ease-out; }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="number">$0.0035</div>
+  <div class="bar-wrap"><div class="bar" id="bar"></div></div>
+</div>
+<script>
+setTimeout(() => { document.getElementById("bar").style.height = "100%"; }, 300);
+</script>
+</body>
+</html>

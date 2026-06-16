@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: rgb(30,32,35); overflow: hidden; margin: 0; }
+</style>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.3.3/pixi.min.js"></script>
+<script>
+(async () => {
+  const app = new PIXI.Application({
+    width: 1280, height: 720,
+    backgroundColor: 0x1E2023,
+    antialias: true,
+  });
+  document.body.appendChild(app.view);
+
+  const style = new PIXI.TextStyle({
+    fontFamily: 'system-ui, sans-serif',
+    fontSize: 120, fontWeight: '700',
+    fill: 'rgb(255,60,60)',
+    dropShadow: true,
+    dropShadowColor: 'rgba(255,60,60,0)',
+    dropShadowBlur: 0,
+    dropShadowDistance: 0,
+  });
+  const text = new PIXI.Text('?', style);
+  text.anchor.set(0.5);
+  text.x = 640; text.y = 360;
+  text.scale.set(0);
+  app.stage.addChild(text);
+
+  const startTime = performance.now();
+  app.ticker.add(() => {
+    const elapsed = (performance.now() - startTime) / 1000;
+    const springP = Math.min(1, elapsed / 0.5);
+    if (springP < 1) {
+      const osc = Math.exp(-10 * springP) * Math.sin(springP * Math.PI * 5);
+      const s = springP < 0.6 ? springP / 0.6 * 1.2 : 1.2 - 0.2 * ((springP - 0.6) / 0.4);
+      text.scale.set(Math.max(0, s));
+      const glow = Math.min(30, springP * 30);
+      text.style.dropShadowBlur = glow;
+      text.style.dropShadowColor = `rgba(255,60,60,${Math.min(0.7, springP * 0.7)})`;
+    } else if (elapsed < 3.5) {
+      const s = 1 + Math.sin((elapsed - 0.5) * Math.PI * 2) * 0.015;
+      text.scale.set(s);
+    }
+  });
+})();
+</script>
+</body>
+</html>

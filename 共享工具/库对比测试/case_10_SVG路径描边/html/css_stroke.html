@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: rgb(30,32,35); overflow: hidden; }
+  .canvas {
+    width: 1280px; height: 720px; position: relative; margin: 0 auto;
+    background: rgb(30,32,35);
+  }
+  svg { width: 100%; height: 100%; }
+  .box {
+    fill: rgba(60,65,70,0.8); stroke: rgba(255,255,255,0.6);
+    stroke-width: 2; rx: 8;
+  }
+  .label {
+    fill: rgba(255,255,255,0.8); font-family: system-ui, sans-serif;
+    font-size: 22px; text-anchor: middle; dominant-baseline: middle;
+  }
+  .line {
+    fill: none; stroke: rgb(0,200,80); stroke-width: 2;
+  }
+  .line-l1 { stroke-dasharray: 120; stroke-dashoffset: 120; animation: draw 0.8s ease-out 0s forwards; }
+  .line-l2 { stroke-dasharray: 120; stroke-dashoffset: 120; animation: draw 0.8s ease-out 0.6s forwards; }
+  .line-l3 { stroke-dasharray: 120; stroke-dashoffset: 120; animation: draw 0.8s ease-out 1.2s forwards; }
+  @keyframes draw {
+    to { stroke-dashoffset: 0; }
+  }
+  .box-l1 { animation: fadeIn 0.5s ease-out 0s forwards; opacity: 0; }
+  .box-l2 { animation: fadeIn 0.5s ease-out 0.6s forwards; opacity: 0; }
+  .box-l3 { animation: fadeIn 0.5s ease-out 1.2s forwards; opacity: 0; }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <svg viewBox="0 0 1280 720">
+    <rect class="box box-l1" x="80" y="160" width="320" height="100"/>
+    <text class="label" x="240" y="210">产品层</text>
+    <line class="line line-l1" x1="400" y1="210" x2="500" y2="210"/>
+    <polygon fill="rgb(0,200,80)" points="500,205 515,210 500,215" class="box-l1"/>
+
+    <rect class="box box-l2" x="540" y="160" width="320" height="100"/>
+    <text class="label" x="700" y="210">路由层</text>
+    <line class="line line-l2" x1="860" y1="210" x2="960" y2="210"/>
+    <polygon fill="rgb(0,200,80)" points="960,205 975,210 960,215" class="box-l2"/>
+
+    <rect class="box box-l3" x="1000" y="160" width="280" height="100"/>
+    <text class="label" x="1140" y="210">模型层</text>
+  </svg>
+</div>
+</body>
+</html>

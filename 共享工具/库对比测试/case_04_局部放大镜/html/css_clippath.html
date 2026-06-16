@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: rgb(30,32,35); overflow: hidden; }
+  .canvas {
+    width: 1280px; height: 720px; position: relative; margin: 0 auto;
+    background: rgb(30,32,35);
+  }
+  .card {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px; height: 400px;
+    background: rgb(50,53,58); border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    padding: 40px 50px;
+  }
+  .title {
+    font-family: system-ui, sans-serif; font-size: 28px;
+    color: rgba(255,255,255,0.9); margin-bottom: 24px; font-weight: 600;
+  }
+  .text-line {
+    height: 16px; border-radius: 3px;
+    background: rgba(255,255,255,0.07); margin-bottom: 16px;
+  }
+  .text-line:nth-child(2) { width: 88%; }
+  .text-line:nth-child(3) { width: 92%; }
+  .text-line:nth-child(4) { width: 75%; }
+  .fine-print {
+    position: absolute; bottom: 40px; left: 50px; right: 50px;
+    font-family: system-ui, sans-serif; font-size: 11px;
+    color: rgba(255,255,255,0.25); line-height: 1.6;
+  }
+  .magnifier {
+    position: absolute; width: 240px; height: 240px;
+    border-radius: 50%; border: 2px solid rgba(255,255,255,0.4);
+    box-shadow: 0 0 16px rgba(255,255,255,0.12);
+    overflow: hidden;
+    right: 60px; bottom: 20px;
+    clip-path: circle(120px at center);
+    animation: magAppear 0.8s ease-out 0s forwards, magShake 0.2s linear 0.8s infinite;
+  }
+  .mag-inner {
+    position: absolute; width: 800px; height: 400px;
+    background: rgb(50,53,58); border-radius: 12px;
+    padding: 40px 50px; box-sizing: border-box;
+    transform: scale(2.5);
+    left: -680px; top: -300px;
+  }
+  @keyframes magAppear {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes magShake {
+    0% { transform: translate(0,0); }
+    50% { transform: translate(1.5px,-1px); }
+    100% { transform: translate(-1.5px,1px); }
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="card">
+    <div class="title">保险条款关键差异分析</div>
+    <div class="text-line"></div><div class="text-line"></div><div class="text-line"></div>
+    <div class="fine-print">* 附录第3.2条 等待期免责 / * 附录第5.7条 重疾定义差异 / * 免责声明 仅供参考</div>
+  </div>
+  <div class="magnifier">
+    <div class="mag-inner">
+      <div class="title">保险条款关键差异分析</div>
+      <div class="text-line"></div><div class="text-line"></div><div class="text-line"></div>
+      <div class="fine-print">* 附录第3.2条 等待期免责 / * 附录第5.7条 重疾定义差异</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

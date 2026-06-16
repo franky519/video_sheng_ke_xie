@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: rgb(30,32,35); overflow: hidden; }
+  .canvas {
+    width: 1280px; height: 720px; position: relative; margin: 0 auto;
+    background: rgb(30,32,35);
+  }
+  svg { width: 100%; height: 100%; }
+  .path-line {
+    fill: none; stroke: rgba(255,255,255,0.1); stroke-width: 1;
+    stroke-dasharray: 6 4;
+  }
+  .dot { fill: rgb(0,200,80); }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <svg viewBox="0 0 1280 720">
+    <path class="path-line" d="M 128 612 C 400 200, 900 500, 1152 108"/>
+    <circle id="dot" class="dot" r="16"/>
+  </svg>
+</div>
+<script type="importmap">
+{ "imports": { "motion": "https://cdn.jsdelivr.net/npm/motion@11/+esm" } }
+</script>
+<script type="module">
+import { animate } from "motion";
+animate("#dot", {
+  offsetPath: `path("M 128 612 C 400 200, 900 500, 1152 108")`,
+  offsetDistance: ["0%", "100%"],
+}, { duration: 2, easing: [0.25, 0.1, 0.25, 1.0] });
+</script>
+</body>
+</html>
