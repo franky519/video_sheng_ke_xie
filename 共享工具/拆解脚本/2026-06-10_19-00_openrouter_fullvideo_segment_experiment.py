@@ -21,7 +21,7 @@ from urllib import request, error
 SCRIPT_DIR = Path(__file__).resolve().parent
 VIDEO_PATH = SCRIPT_DIR.parent / "02_别人视频的拆解分析" / "2026-06-02_抖音参考视频切片分析包" / "raw_downloads" / "01_7634456235240164659_AI集体涨价，免费额度越来越少了？ #AI#GPT#应用.mp4"
 ENV_PATH = SCRIPT_DIR.parent / "Gemini本地私密配置.env"
-PROMPT_FILE_PATH = SCRIPT_DIR.parent / "04_教AI拉片的提示词" / "2026-06-09_17-30_Gemini物理拉片分析prompt_v2.txt"
+PROMPT_FILE_PATH = SCRIPT_DIR.parent / "提示词" / "2026-06-17_15-50_Gemini工业级原片后期解耦拉片分析prompt_v4.txt"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 OUTPUT_DIR = SCRIPT_DIR.parent / "02_别人视频的拆解分析"
 
@@ -134,27 +134,20 @@ def encode_full_video(max_dim=640, target_fps=10) -> str:
 
 
 def build_prompt(start_sec: int, end_sec: int) -> str:
-    """加载 v2 prompt 模板并替换时间段参数。"""
+    """加载 v4 prompt 模板并追加当前分段时间范围。"""
     if not PROMPT_FILE_PATH.exists():
         raise FileNotFoundError(f"找不到 prompt 模板文件: {PROMPT_FILE_PATH}")
 
     prompt_text = PROMPT_FILE_PATH.read_text(encoding="utf-8")
 
-    # 将模板中的"前 30 秒（00:00 - 00:30）"替换为指定时段
     start_mm_ss = f"{start_sec // 60:02d}:{start_sec % 60:02d}"
     end_mm_ss = f"{end_sec // 60:02d}:{end_sec % 60:02d}"
     segment_desc = f"{start_mm_ss} - {end_mm_ss}"
 
-    # 替换第一行中的时间段描述
-    prompt_text = prompt_text.replace(
-        "前 30 秒（00:00 - 00:30）",
-        f"{start_mm_ss} 至 {end_mm_ss}（{end_sec - start_sec} 秒）"
-    )
-
-    # 替换末尾注意事项中的"前 30 秒"
-    prompt_text = prompt_text.replace(
-        "对传入的视频前 30 秒进行程序化拉片拆解",
-        f"对传入的视频 {segment_desc} 时段进行程序化拉片拆解"
+    prompt_text = (
+        f"{prompt_text.rstrip()}\n\n"
+        f"本次只分析目标视频的 **{segment_desc}** 时段。"
+        "如果视频是完整上传的，请不要分析这个时间段之外的内容。"
     )
 
     print(f"Prompt 已配置为分析时段: {segment_desc}")

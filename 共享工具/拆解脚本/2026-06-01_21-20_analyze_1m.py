@@ -16,7 +16,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 VIDEO_PATH = SCRIPT_DIR.parent / "02_参考拉片库" / "2026-05-31_10-47_差评君冲浪普拉斯视频切片分析包" / "差评君_前5分钟低清参考片段.mp4"
 CLIP_PATH = SCRIPT_DIR.parent / "temp_1m_clip.mp4"
 ENV_PATH = SCRIPT_DIR.parent / "Gemini本地私密配置.env"
-PROMPT_FILE_PATH = SCRIPT_DIR.parent / "04_提示词工程" / "2026-06-02_11-45_Gemini物理拉片分析prompt.txt"
+PROMPT_FILE_PATH = SCRIPT_DIR.parent / "提示词" / "2026-06-17_15-50_Gemini工业级原片后期解耦拉片分析prompt_v4.txt"
 BASE_URL = "https://generativelanguage.googleapis.com/v1beta"
 UPLOAD_URL = "https://generativelanguage.googleapis.com/upload/v1beta/files"
 

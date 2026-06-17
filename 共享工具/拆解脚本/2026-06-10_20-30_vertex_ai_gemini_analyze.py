@@ -38,8 +38,8 @@ VIDEO_PATH = (
     / "01_7634456235240164659_AI集体涨价，免费额度越来越少了？ #AI#GPT#应用.mp4"
 )
 PROMPT_FILE_PATH = (
-    PROJECT_DIR / "04_教AI拉片的提示词"
-    / "2026-06-09_17-30_Gemini物理拉片分析prompt_v2.txt"
+    PROJECT_DIR / "提示词"
+    / "2026-06-17_15-50_Gemini工业级原片后期解耦拉片分析prompt_v4.txt"
 )
 CLIP_PATH = PROJECT_DIR / "temp_vertex_clip.mp4"
 

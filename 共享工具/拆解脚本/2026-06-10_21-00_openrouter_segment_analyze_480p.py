@@ -11,7 +11,6 @@ import argparse
 import base64
 import cv2
 import json
-import re
 import sys
 import time
 from pathlib import Path
@@ -20,7 +19,7 @@ from urllib import request, error
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 ENV_PATH = SCRIPT_DIR.parent / "Gemini本地私密配置.env"
-PROMPT_FILE_PATH = SCRIPT_DIR.parent / "04_教AI拉片的提示词" / "2026-06-09_17-30_Gemini物理拉片分析prompt_v2.txt"
+PROMPT_FILE_PATH = SCRIPT_DIR.parent / "提示词" / "2026-06-17_15-50_Gemini工业级原片后期解耦拉片分析prompt_v4.txt"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 BEIJING = timezone(timedelta(hours=8))
 
@@ -111,23 +110,16 @@ def crop_video(video_path: Path, clip_path: Path, start_sec: int, end_sec: int):
 
 
 def build_prompt(start_sec: int, end_sec: int) -> str:
-    """加载 v2 prompt 模板并替换时间范围"""
+    """加载 v4 prompt 模板并追加当前分段时间范围。"""
     if not PROMPT_FILE_PATH.exists():
         raise FileNotFoundError(f"找不到 prompt 模板: {PROMPT_FILE_PATH}")
     template = PROMPT_FILE_PATH.read_text(encoding="utf-8")
-    # 替换模板中的 "前 30 秒（00:00 - 00:30）"
     start_str = fmt_time(start_sec)
     end_str = fmt_time(end_sec)
-    prompt = re.sub(
-        r"前\s*30\s*秒（00:00\s*-\s*00:30）",
-        f"{start_str} - {end_str} 时段",
-        template
-    )
-    # 也替换 Few-Shot 示例末尾的指令
-    prompt = re.sub(
-        r"对传入的视频前\s*30\s*秒进行",
-        f"对传入的视频 {start_str}-{end_str} 时段进行",
-        prompt
+    prompt = (
+        f"{template.rstrip()}\n\n"
+        f"本次只分析目标视频的 **{start_str} - {end_str}** 时段。"
+        "如果视频片段本身已经裁剪为这段内容，也请按原片时间轴标注为该绝对时间范围。"
     )
     return prompt
 

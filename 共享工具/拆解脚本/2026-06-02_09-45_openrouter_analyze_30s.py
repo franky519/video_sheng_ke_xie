@@ -17,7 +17,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 VIDEO_PATH = SCRIPT_DIR.parent / "02_别人视频的拆解分析" / "2026-06-02_抖音参考视频切片分析包" / "raw_downloads" / "01_7634456235240164659_AI集体涨价，免费额度越来越少了？ #AI#GPT#应用.mp4"
 CLIP_PATH = SCRIPT_DIR.parent / "temp_30s_clip.mp4"
 ENV_PATH = SCRIPT_DIR.parent / "Gemini本地私密配置.env"
-PROMPT_FILE_PATH = SCRIPT_DIR.parent / "04_教AI拉片的提示词" / "2026-06-09_17-30_Gemini物理拉片分析prompt_v2.txt"
+PROMPT_FILE_PATH = SCRIPT_DIR.parent / "提示词" / "2026-06-17_15-50_Gemini工业级原片后期解耦拉片分析prompt_v4.txt"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 # 北京时区
