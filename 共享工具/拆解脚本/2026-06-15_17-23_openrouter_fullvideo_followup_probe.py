@@ -434,6 +434,39 @@ def write_turn_jsonl(path: Path, row: dict[str, Any]) -> None:
         f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
 
+def build_turn_log_row(
+    index: int,
+    model: str,
+    mode: str,
+    segment: tuple[int, int],
+    generation_id: str | None,
+    elapsed: float,
+    finish_reason: str | None,
+    cost: CostInfo,
+    cny: float | None,
+    usage: dict[str, Any],
+    metadata: dict[str, Any] | None,
+    content: str,
+) -> dict[str, Any]:
+    return {
+        "time_bj": now_bj_display(),
+        "round": index,
+        "model": model,
+        "mode": mode,
+        "segment": {"start": segment[0], "end": segment[1]},
+        "generation_id": generation_id,
+        "elapsed_sec": elapsed,
+        "finish_reason": finish_reason,
+        "cost_usd": cost.usd,
+        "cost_cny": cny,
+        "cost_source": cost.source,
+        "usage": usage,
+        "generation_metadata": metadata,
+        "content_chars": len(content),
+        "content": content,
+    }
+
+
 def write_markdown_report(
     path: Path,
     args: argparse.Namespace,
@@ -581,23 +614,22 @@ def run_probe(args: argparse.Namespace) -> int:
 
             write_turn_jsonl(
                 jsonl_path,
-                {
-                    "time_bj": now_bj_display(),
-                    "round": index,
-                    "model": args.model,
-                    "mode": args.mode,
-                    "segment": {"start": segment[0], "end": segment[1]},
-                    "generation_id": generation_id,
-                    "elapsed_sec": elapsed,
-                    "finish_reason": finish_reason,
-                    "cost_usd": cost.usd,
-                    "cost_cny": cny,
-                    "cost_source": cost.source,
-                    "usage": usage,
-                    "generation_metadata": metadata,
-                    "content_chars": len(content),
-                },
+                build_turn_log_row(
+                    index=index,
+                    model=args.model,
+                    mode=args.mode,
+                    segment=segment,
+                    generation_id=generation_id,
+                    elapsed=elapsed,
+                    finish_reason=finish_reason,
+                    cost=cost,
+                    cny=cny,
+                    usage=usage,
+                    metadata=metadata,
+                    content=content,
+                ),
             )
+            write_markdown_report(report_path, args, video_path, processed_path, segments, history, args.usd_cny)
         except error.HTTPError as exc:
             body = exc.read().decode("utf-8", errors="replace")
             print(f"HTTP {exc.code}: {body[:2000]}")

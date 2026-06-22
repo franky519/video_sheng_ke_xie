@@ -69,6 +69,25 @@ class FullVideoFollowupProbeTests(unittest.TestCase):
         self.assertEqual(cost.usd, 0.0123)
         self.assertEqual(cost.source, "generation.total_cost")
 
+    def test_build_turn_log_row_persists_full_content(self):
+        module = load_module()
+        row = module.build_turn_log_row(
+            index=4,
+            model="google/gemini-3.1-pro-preview",
+            mode="carry-first-video",
+            segment=(85, 120),
+            generation_id="gen-test",
+            elapsed=12.5,
+            finish_reason="stop",
+            cost=module.CostInfo(0.123, "stream.usage.cost"),
+            cny=0.89175,
+            usage={"prompt_tokens": 10},
+            metadata=None,
+            content="完整分段正文",
+        )
+        self.assertEqual(row["content"], "完整分段正文")
+        self.assertEqual(row["content_chars"], 6)
+
     def test_check_model_only_can_run_without_api_key_when_model_check_is_skipped(self):
         module = load_module()
         code = module.main(["--check-model-only", "--skip-model-check", "--env", "/path/that/does/not/exist"])
