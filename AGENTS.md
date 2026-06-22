@@ -55,11 +55,10 @@
 
 本项目中所有带时间戳前缀的文件名（如 `2026-06-17_17-57_项目总览.md`），在各文档内部引用时使用相对路径。依赖关系图中使用简化标识（不携带时间戳，如 `openrouter_segment_analyze.py`），实际精确路径通过目录导航索引获取。
 
-## Proposal 工作流 [计划中]
+## 结构性变更流程
 
-结构性变更的最终形态是通过 `/proposal` 命令触发 formal 流程：创建 proposal → 自动算 blast radius → 写入 PROPOSALS.md 作为变更账本 → 逐文件执行 → 验证 → 回写 CLOSE。
-
-当前 PROPOSALS.md 和 `_skills/doc-proposal-workflow/SKILL.md` 尚未落地（实施计划位于[轻量Proposal工作流Skill实施计划](./2026-06-17_15-50_轻量Proposal工作流Skill实施计划.md)）。过渡期，所有结构性修改先按上述 Blast Radius 行为手动执行——AI 对照依赖关系图算波及范围、停住确认、逐文件执行、跑验证。
+涉及多文件的结构性变更（Prompt 升级、文档重组、标准修订等），使用 `/doc-proposal` 触发完整流程。
+详见 [_skills/doc-proposal/SKILL.md](./_skills/doc-proposal/SKILL.md)。
 
 ## 参考文档
 
