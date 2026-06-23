@@ -83,7 +83,7 @@
 
 | # | Case | 源脚本位置 | 核心参数 | 比对库 |
 |---|------|-----------|---------|--------|
-| 1 | 高斯模糊 + 透明度 | `05_写代码做视频的工程/_归档_旧版方案/2026-06-03_09-20_豆包科普视频_0_30s图层运动工程调整与待办脚本.md` 第49行 | Opacity 100%→35%, Blur 0→18px, 1.5s线性 | CSS filter · Canvas 2D · GSAP · PixiJS |
+| 1 | 高斯模糊 + 透明度 | `视频项目/01_为什么他的豆包更聪明/05_渲染工程/_归档_旧版方案/2026-06-03_09-20_豆包科普视频_0_30s图层运动工程调整与待办脚本.md` 第49行 | Opacity 100%→35%, Blur 0→18px, 1.5s线性 | CSS filter · Canvas 2D · GSAP · PixiJS |
 | 2 | 弹性弹出 | 同上第47行 | Scale 0%→100%, spring(damping:15, mass:0.6), 左侧0s/右侧延迟1s | GSAP · Motion · Anime.js · CSS keyframes |
 | 3 | ClipPath 擦除 | 同上第49行 | inset(0% 100% 0% 0%) → inset(0% 0% 0% 0%), 绿色1s/橙色1s | CSS clip-path · GSAP · Motion · Canvas 2D |
 | 4 | 局部放大镜 | 同上第49-50行 | circle(120px), 内部scale(2.5), ±2px正弦抖动 | CSS clip-path · Canvas 2D · PixiJS |
@@ -94,14 +94,14 @@
 | # | Case | 源脚本位置 | 核心参数 | 比对库 |
 |---|------|-----------|---------|--------|
 | 6 | 打字机 + 光标 | `共享工具/提示词/_归档_旧版prompt/2026-06-04_11-40_豆包前30秒Few-Shot视觉语法迁移示例.md` 第34行 | 逐字出现1-1.4s, 光标0.3s闪烁 | JS interval · GSAP · CSS steps · Canvas |
-| 7 | 阴影发光 | `05_写代码做视频的工程/_归档_旧版方案/2026-06-03_09-20_豆包科普视频_0_30s图层运动工程调整与待办脚本.md` 第50行 | drop-shadow 0→30px, spring(damping:10, mass:0.5), Scale 0→120%→100% | CSS filter · Canvas · PixiJS · GSAP |
+| 7 | 阴影发光 | `视频项目/01_为什么他的豆包更聪明/05_渲染工程/_归档_旧版方案/2026-06-03_09-20_豆包科普视频_0_30s图层运动工程调整与待办脚本.md` 第50行 | drop-shadow 0→30px, spring(damping:10, mass:0.5), Scale 0→120%→100% | CSS filter · Canvas · PixiJS · GSAP |
 
 ### P2 级（3 个）
 
 | # | Case | 源脚本位置 | 核心参数 | 比对库 |
 |---|------|-----------|---------|--------|
 | 8 | 贝塞尔路径 | `共享工具/提示词/2026-06-09_17-30_Gemini物理拉片分析prompt_v2.txt` 第40-43行（Bezier参数规范） | cubic-bezier(0.25,0.1,0.25,1.0) 路径运动 | CSS bezier · GSAP motionPath · Motion · Anime.js |
-| 9 | 数字滚动 | `01_文字稿与原始素材/_归档_旧版素材表/2026-05-31_13-06_豆包科普视频逐镜头素材实现表.csv` S14行 | 12-18帧滚动到位, 柱子0.6-1s升起 | GSAP · Anime.js · JS rAF · CSS @property |
+| 9 | 数字滚动 | `视频项目/01_为什么他的豆包更聪明/00_文稿/_归档_旧版素材表/2026-05-31_13-06_豆包科普视频逐镜头素材实现表.csv` S14行 | 12-18帧滚动到位, 柱子0.6-1s升起 | GSAP · Anime.js · JS rAF · CSS @property |
 | 10 | SVG 路径描边 | 同上 S08行 | 三层结构图每层0.5-0.8s出现, 箭头逐段点亮 | CSS stroke-dasharray · GSAP drawSVG · Anime.js |
 
 ### 执行顺序

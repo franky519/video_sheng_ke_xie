@@ -10,8 +10,8 @@
 
 分辨率：1080x1920（竖屏）
 
-本次分析范围：全长分段拉片（30s/段，5s 重叠缓冲）
+本次分析范围：全文 v4 拉片（Gemini 工业级原片后期解耦拉片分析 prompt v4）
 
-分段拉片工具：OpenRouter + gemini-3.5-flash + v2 prompt
+拉片工具：Gemini + v4 Prompt（原片后期解耦，按 Sequence 输出）
 
 说明：这些拉片结果用于内部风格拆解和 Few-Shot 样本，不作为最终发布素材。
