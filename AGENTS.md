@@ -55,12 +55,28 @@
 
 本项目中所有带时间戳前缀的文件名（如 `2026-06-22_15-30_项目总览.md`），在各文档内部引用时使用相对路径。依赖关系图中使用简化标识（不携带时间戳，如 `openrouter_segment_analyze.py`），实际精确路径通过目录导航索引获取。
 
-## 结构性变更流程
+## 任务工作流
 
-涉及多文件的结构性变更（Prompt 升级、文档重组、标准修订等），使用 `/doc-proposal` 触发完整流程。
+### 从想法到执行
 
-调用链：`/doc-grilling`（追问）→ `/doc-prd`（PRD + 任务拆解）→ `/doc-execute T-NNN`（逐任务执行）。
-Skill 定义位于 `.claude/skills/` 目录下。
+创意构思和任务拆解走 Superpowers 流程：
+
+`brainstorming`（创意追问 + 方案设计）→ `writing-plans`（拆解为可执行步骤）→ `executing-plans`（逐步骤执行）。
+
+多步骤可并行的任务场景下，`dispatching-parallel-agents` 可派独立子 Agent 并行推进。
+
+### 结构性变更（文档体系）
+
+涉及多文件的结构性变更（Prompt 升级、文档重组、标准修订等），沿用 proposal → backlog 模式：
+
+1. `brainstorming` 澄清需求，产出设计
+2. 写 `_proposals/P00N_功能名.md` 作为决策记录
+3. `writing-plans` 做依赖分析（对照依赖关系图 11 条链）、拆解为 BACKLOG 任务
+4. `executing-plans` 逐任务执行，遵循 Blast Radius 行为
+
+### Skill 部署
+
+项目技能位于 `.opencode/skills/`，通过 symlink 指向 `~/.agents/skills/superpowers/`。`.codex/skills/` 同步相同的 symlink 结构供 Codex CLI 使用。
 
 ## 参考文档
 
@@ -70,5 +86,5 @@ Skill 定义位于 `.claude/skills/` 目录下。
 ---
 
 > 创建时间：2026-06-21 12:04（北京时间）
-> 最后更新：2026-06-21 12:04（北京时间）
-> 更新次数：1
+> 最后更新：2026-06-24 01:00（北京时间）
+> 更新次数：2
