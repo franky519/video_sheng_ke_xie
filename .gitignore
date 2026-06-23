@@ -22,3 +22,4 @@ temp_frames/
 # OS
 .DS_Store
 :Zone.Identifier
+.worktrees/
