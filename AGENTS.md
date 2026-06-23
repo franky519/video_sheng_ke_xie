@@ -67,12 +67,28 @@
 
 ### 结构性变更（文档体系）
 
-涉及多文件的结构性变更（Prompt 升级、文档重组、标准修订等），沿用 proposal → backlog 模式：
+涉及多文件的结构性变更（Prompt 升级、文档重组、标准修订等），沿用 proposal → backlog 模式。
 
-1. `brainstorming` 澄清需求，产出设计
-2. 写 `_proposals/P00N_功能名.md` 作为决策记录
-3. `writing-plans` 做依赖分析（对照依赖关系图 11 条链）、拆解为 BACKLOG 任务
-4. `executing-plans` 逐任务执行，遵循 Blast Radius 行为
+**硬约束：** brainstorming 澄清需求后，必须将确认结果写入 `_proposals/P00N_功能名.md`。没落盘就不算完成。
+
+Proposal 文件最小格式：
+
+```markdown
+# P00N [功能名]
+
+状态：GRILLED
+
+## 问题观察
+## 目标
+## 不做
+## 完成标志
+```
+
+流程：
+
+1. `brainstorming` 澄清需求 → 产出 design → **必须落盘为 `_proposals/P00N.md`**
+2. `writing-plans` 读 proposal → 对照依赖关系图 11 条链做依赖分析 → 拆解为 BACKLOG 任务 → 回写 proposal 状态为 PLANNED
+3. `executing-plans` 读 BACKLOG → 逐任务执行，遵循 Blast Radius 行为 → 完成后 proposal 状态改为 DONE
 
 ### Skill 部署
 
