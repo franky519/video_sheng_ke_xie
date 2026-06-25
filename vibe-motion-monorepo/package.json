@@ -1,0 +1,45 @@
+{
+  "name": "vibe-motion-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "scripts": {
+    "postinstall": "node scripts/remotion-ensure-browser.mjs",
+    "remotion:ensure-browser": "node scripts/remotion-ensure-browser.mjs",
+    "remotion:studio": "node scripts/remotion-cli.mjs studio",
+    "render:main": "npx remotion render remotion/index.jsx DoubaoScience30 ../../视频项目/01_为什么他的豆包更聪明/06_成片/main.mp4 --codec h264 --overwrite",
+    "render:main-debug": "npx remotion render remotion/index.jsx DoubaoScience30-Debug ../../视频项目/01_为什么他的豆包更聪明/06_成片/main_debug.mp4 --codec h264 --overwrite",
+    "render:screen-record": "npx remotion render remotion/index.jsx Sequence01 ../../_探索/P004/2026-06-23_SCREEN_RECORD_组装验证/out/sequence01.mp4 --codec h264 --overwrite",
+    "render:code-data-0": "npx remotion render remotion/index.jsx RankingAnimation ../../_探索/P004/2026-06-24_test0_CODE_DATA_手写参考/out/ranking.mp4 --codec h264 --overwrite",
+    "render:code-data-1": "npx remotion render remotion/index.jsx RankingAnimation-AI ../../_探索/P004/2026-06-24_test1_CODE_DATA_Remotion-AI设计/out/ranking.mp4 --codec h264 --overwrite"
+  },
+  "dependencies": {
+    "@fontsource-variable/jetbrains-mono": "^5.2.8",
+    "@remotion/cli": "4.0.438",
+    "@remotion/media-utils": "4.0.438",
+    "@remotion/studio": "4.0.438",
+    "@remotion/tailwind-v4": "4.0.438",
+    "@tailwindcss/vite": "^4.1.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "4.0.438",
+    "tailwindcss": "^4.1.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.22.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.22.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "vite": "^6.3.1"
+  }
+}

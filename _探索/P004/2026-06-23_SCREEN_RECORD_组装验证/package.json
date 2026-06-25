@@ -1,0 +1,17 @@
+{
+  "name": "screen-record-assembly-test",
+  "private": true,
+  "scripts": {
+    "render": "npx remotion render Sequence01 out/sequence01.mp4"
+  },
+  "dependencies": {
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "remotion": "^4.0.471"
+  },
+  "devDependencies": {
+    "@remotion/cli": "^4.0.471",
+    "@types/react": "^19.0.0",
+    "typescript": "^5.5.0"
+  }
+}
