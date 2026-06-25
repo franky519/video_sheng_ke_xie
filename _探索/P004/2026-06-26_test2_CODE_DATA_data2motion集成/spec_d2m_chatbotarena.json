@@ -1,0 +1,12 @@
+{
+  "chart": "dumbbell",
+  "title": "豆包 Seed 2.0 Pro · Chatbot Arena 排名变化",
+  "takeaway": "三四月排进前十，两个月后跌至第 35 名",
+  "source": "Chatbot Arena 文本榜 2026年3–5月",
+  "duration": 2200,
+  "start_label": "2026 年三四月",
+  "end_label": "两个月后",
+  "rows": [
+    {"label": "豆包 Pro", "start": 8, "end": 35}
+  ]
+}
